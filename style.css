@@ -44,7 +44,7 @@ body::before{
     width: 200px;
     height: 250px;
     top: 10%;
-    left: calc(50% - 100px);
+    left: calc(50% - -150px);
     transform-style: preserve-3d;
     transform: perspective(1000px);
     animation: autoRun 20s linear infinite;
@@ -75,7 +75,7 @@ body::before{
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: min(1400px, 100vw);
+    width: min(100%, 100vw);
     height: max-content;
     padding-bottom: 100px;
     display: flex;
@@ -116,7 +116,7 @@ body::before{
     left: 0;
     background-size: auto 130%;
     background-repeat: no-repeat;
-    background-position: top center;
+    /* background-position: top center; */
     z-index: 1;
 }
 
