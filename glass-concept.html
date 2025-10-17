@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liquid Glass — Demo</title>
+  <style>
+    :root{
+      --bg1:#0f1724;
+      --bg2:#071025;
+      --glass-bg: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.12);
+      --accent-1: #7b61ff;
+      --accent-2: #00d4ff;
+      --card-radius: 18px;
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    /* page background with animated gradient */
+    html,body{height:100%;}
+    body{
+      margin:0;
+      min-height:100vh;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(123,97,255,0.12), transparent 6%),
+                  radial-gradient(900px 400px at 90% 90%, rgba(0,212,255,0.08), transparent 10%),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;align-items:center;justify-content:center; padding:40px;
+    }
+
+    /* animated soft blobs that make it feel liquid */
+    .blob{
+      position:absolute;
+      pointer-events:none;
+      filter: blur(60px) saturate(150%);
+      mix-blend-mode: screen;
+      opacity:0.9;
+      transform: translate3d(0,0,0);
+      will-change: transform;
+    }
+    .blob.b1{width:520px;height:520px;left:-120px;top:-80px;background:radial-gradient(circle at 30% 30%, var(--accent-1), transparent 40%);} 
+    .blob.b2{width:420px;height:420px;right:-140px;bottom:-60px;background:radial-gradient(circle at 70% 70%, var(--accent-2), transparent 45%);} 
+
+    @keyframes floatA{
+      0%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(-20px) scale(1.05)}
+      100%{transform:translateY(0) scale(1)}
+    }
+    @keyframes floatB{
+      0%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(18px) scale(0.98)}
+      100%{transform:translateY(0) scale(1)}
+    }
+    .blob.b1{animation: floatA 8s ease-in-out infinite;}
+    .blob.b2{animation: floatB 9.5s ease-in-out infinite;}
+
+    /* main layout */
+    .wrap{
+      width:100%;max-width:1200px; position:relative; z-index:2; display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;
+    }
+
+    header{grid-column:1/-1; display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .logo{font-weight:700;letter-spacing:0.2px;color:#fff}
+    .nav{display:flex;gap:16px;align-items:center}
+    .nav a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:14px}
+
+    /* glass card */
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:var(--card-radius);
+      padding:36px;
+      border:1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      position:relative; overflow:hidden; color: #f8fafc;
+    }
+
+    .hero h1{font-size:34px;margin:0 0 10px 0;line-height:1.05}
+    .hero p{margin:0 0 18px 0; color:rgba(255,255,255,0.72)}
+    .cta{display:inline-flex;gap:12px;align-items:center;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#021125;font-weight:600;text-decoration:none}
+
+    /* smaller cards column */
+    .side{
+      display:flex;flex-direction:column;gap:18px;
+    }
+    .mini{
+      background:var(--glass-bg);
+      border-radius:14px;padding:18px;border:1px solid var(--glass-border);
+      box-shadow:0 6px 20px rgba(2,6,23,0.5);backdrop-filter: blur(10px);
+      transform-origin:center; transition:transform .28s cubic-bezier(.2,.9,.3,1);
+    }
+    .mini:hover{transform:translateY(-6px) scale(1.02)}
+    .mini h3{margin:0 0 6px 0;font-size:16px}
+    .mini p{margin:0;font-size:13px;color:rgba(255,255,255,0.68)}
+
+    /* liquid shimmer inside hero using before pseudo */
+    .hero::before{
+      content:"";position:absolute;inset:-40% -10% -40% -10%;
+      background:linear-gradient(120deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      transform:rotate(12deg);pointer-events:none;mix-blend-mode:overlay;opacity:0.9;
+    }
+
+    /* subtle morphing effect with inner blob element */
+    .liquid{
+      position:absolute;right:-20%;top:-10%;width:320px;height:320px;border-radius:50%;filter:blur(24px) contrast(1.05);
+      background:linear-gradient(180deg,var(--accent-1),var(--accent-2));opacity:0.16;transform-origin:center; animation:morph 9s ease-in-out infinite;
+    }
+    @keyframes morph{
+      0%{border-radius:42% 58% 60% 40% / 50% 40% 60% 50%; transform:scale(1)}
+      25%{border-radius:58% 42% 40% 60% / 60% 50% 40% 50%; transform:scale(1.08)}
+      50%{border-radius:45% 55% 65% 35% / 40% 60% 50% 60%; transform:scale(0.96)}
+      75%{border-radius:52% 48% 38% 62% / 55% 44% 66% 35%; transform:scale(1.04)}
+      100%{border-radius:42% 58% 60% 40% / 50% 40% 60% 50%; transform:scale(1)}
+    }
+
+    /* responsive */
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr;max-width:920px}
+      .side{order:2}
+      header{flex-direction:column;gap:12px;align-items:flex-start}
+    }
+
+  </style>
+</head>
+<body>
+  <!-- soft colorful blobs -->
+  <div class="blob b1" aria-hidden></div>
+  <div class="blob b2" aria-hidden></div>
+
+  <div class="wrap">
+    <header>
+      <div class="logo">LiquidGlass</div>
+      <nav class="nav">
+        <a href="#">Product</a>
+        <a href="#">Docs</a>
+        <a href="#">Contact</a>
+      </nav>
+    </header>
+
+    <main class="hero" id="hero">
+      <div class="liquid" id="liquid"></div>
+      <h1>Liquid glass UI — modern glassmorphism with flow</h1>
+      <p>Beautifully layered glass-style interface with soft liquid motion, interactive parallax, and accessible components. Paste this file and preview in any modern browser.</p>
+      <a class="cta" href="#">Get started →</a>
+    </main>
+
+    <aside class="side">
+      <div class="mini" id="card1">
+        <h3>Frosted Controls</h3>
+        <p>Buttons, inputs, and cards that sit naturally on top of the liquid background.</p>
+      </div>
+      <div class="mini" id="card2">
+        <h3>Motion & Feedback</h3>
+        <p>Subtle morphing and float animations make the UI feel alive without distraction.</p>
+      </div>
+      <div class="mini" id="card3">
+        <h3>Performance Focused</h3>
+        <p>Using composited transforms, blur, and GPU-friendly properties for smooth playback.</p>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // small JS: parallax for blobs and card tilt on mouse move
+    (function(){
+      const b1 = document.querySelector('.blob.b1');
+      const b2 = document.querySelector('.blob.b2');
+      const hero = document.getElementById('hero');
+      const cards = document.querySelectorAll('.mini');
+
+      function onMove(e){
+        const x = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth/2;
+        const y = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight/2;
+        const cx = window.innerWidth/2, cy = window.innerHeight/2;
+        const dx = (x - cx)/cx; const dy = (y - cy)/cy;
+
+        // blobs move slightly for parallax
+        b1.style.transform = `translate3d(${dx * 30}px, ${dy * 20}px, 0) scale(1.02)`;
+        b2.style.transform = `translate3d(${dx * -24}px, ${dy * -18}px, 0) scale(1.01)`;
+
+        // hero liquid subtle movement
+        const liquid = document.getElementById('liquid');
+        liquid.style.transform = `translate(${dx*18}px, ${dy*10}px) scale(${1 + Math.abs(dx)*0.02})`;
+
+        // tilt mini cards
+        cards.forEach((c,i)=>{
+          const rx = dy*8*(i+1); const ry = -dx*8*(i+1);
+          c.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px) scale(1.01)`;
+        });
+      }
+
+      window.addEventListener('mousemove', onMove, {passive:true});
+      window.addEventListener('touchmove', onMove, {passive:true});
+
+      // reduce motion for users who prefer it
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if(mq.matches){
+        b1.style.animation = 'none'; b2.style.animation='none'; document.querySelector('.liquid').style.animation='none';
+      }
+    })();
+  </script>
+</body>
+</html>
