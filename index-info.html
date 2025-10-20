@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roldan Prado - Resume Website</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
+    }
+
+    nav {
+      width: 100%;
+      padding: 20px 40px;
+      background: linear-gradient(90deg, #333, #444);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s ease-in-out;
+    }
+
+    nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .burger {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 1001;
+    }
+    .burger div {
+      width: 30px;
+      height: 3px;
+      background: white;
+      transition: background 0.6s ease, box-shadow 0.6s ease, transform 0.4s ease;
+      box-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    .burger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .burger.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .burger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    nav ul {
+      list-style: none;
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background: rgba(0,0,0,0.9);
+      border-radius: 10px;
+      padding: 15px;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.6s ease, opacity 0.6s ease;
+      z-index: 1000;
+    }
+
+    nav ul.show {
+      max-height: 600px;
+      opacity: 1;
+    }
+
+    nav ul li {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    nav ul.show li {
+      animation: fadeBounceDown 0.6s forwards;
+    }
+
+    nav ul.hide li {
+      animation: fadeUp 0.4s forwards;
+    }
+
+    nav ul.show li:nth-child(1) { animation-delay: 0.1s; }
+    nav ul.show li:nth-child(2) { animation-delay: 0.2s; }
+    nav ul.show li:nth-child(3) { animation-delay: 0.3s; }
+    nav ul.show li:nth-child(4) { animation-delay: 0.4s; }
+    nav ul.show li:nth-child(5) { animation-delay: 0.5s; }
+    nav ul.show li:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes fadeBounceDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      50% { opacity: 1; transform: translateY(5px); }
+      70% { transform: translateY(-2px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    nav ul li a {
+      display: inline-block;
+      width: 220px;
+      text-align: center;
+      padding: 15px 20px;
+      margin: 5px 0;
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      background-size: 200% 200%;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      animation: gradientMove 5s ease infinite;
+    }
+
+    nav ul li a:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(37,117,252,0.8);
+    }
+
+    header {
+      height: 50vh;
+      background: linear-gradient(120deg, #ff7e5f, #feb47b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+
+    header h1 {
+      font-size: 48px;
+    }
+
+    .resume-section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      background: linear-gradient(135deg, #ffffff, #f0f4ff);
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+
+    .resume-section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .resume-section p, .resume-section li {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .resume-section ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      margin-top: auto;
+      background: linear-gradient(90deg, #232526, #414345);
+      color: white;
+      padding: 60px 40px;
+      font-size: 14px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    footer .footer-logo {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    footer .footer-menu, footer .footer-contact, footer .footer-form {
+      flex: 1;
+      min-width: 250px;
+      margin: 10px;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    footer ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+
+    footer ul li a:hover {
+      color: #feb47b;
+    }
+
+    footer form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    footer form input, footer form textarea {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    footer form button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    footer form button:hover {
+      background: linear-gradient(45deg, #2575fc, #6a11cb);
+    }
+
+    footer .copyright {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Roldan Prado</div>
+    <div class="burger" id="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul id="menu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="/project-portfolio/wordpress-project.html">WordPress Project</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Welcome to My Resume Website</h1>
+  </header>
+
+  <section id="about" class="resume-section">
+    <h2>About Me</h2>
+    <p><strong>Roldan Sapitula Prado</strong></p>
+    <p>Enthusiastic and detail-driven web developer with solid expertise in JavaScript, HTML, CSS, and modern frameworks. Adept at creating responsive, user-centric websites and interactive digital experiences. Dedicated to continuous learning and growth within a collaborative and innovative team environment.</p>
+  </section>
+
+  <section id="skills" class="resume-section">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li>WordPress Development (custom themes, plugins, responsive design)</li>
+      <li>Email troubleshooting (SMTP, contact forms)</li>
+      <li>Custom Post Types (CPTs)</li>
+      <li>WooCommerce setup and management</li>
+      <li>Page Builders: Elementor Pro, Divi, SiteOrigin, Gutenberg, WPBakery</li>
+      <li>Squarespace, Shopify, Wix</li>
+      <li>HTML, CSS, JavaScript, PHP</li>
+      <li>Adobe Photoshop, Premiere, Canva, Figma</li>
+    </ul>
+  </section>
+
+  <section id="experience" class="resume-section">
+    <h2>Experience</h2>
+    <p><strong>Web Developer / Programmer</strong> — Dream Webworks Creations Inc. (Aug 2020 – Jun 2025)</p>
+    <ul>
+      <li>Design, develop, and maintain dynamic, user-friendly websites tailored to client requirements.</li>
+      <li>Implement both front-end and back-end functionalities, including theme customization and plugin integration.</li>
+      <li>Collaborate with cross-functional teams to deliver high-quality web solutions.</li>
+      <li>Conduct regular website testing, debugging, and troubleshooting.</li>
+    </ul>
+  </section>
+
+  <section id="education" class="resume-section">
+    <h2>Education</h2>
+    <p><strong>Bachelor of Science in Information Technology</strong>, University of Baguio (2017 – 2021)</p>
+    <p><strong>Associate in Computer Technology</strong>, Polytechnic College of La Union (2010 – 2013)</p>
+  </section>
+
+  <section id="contact" class="resume-section">
+    <h2>Contact Information</h2>
+    <p><strong>Phone:</strong> +63 976 050 7326</p>
+    <p><strong>Email:</strong> pradoroldan00@gmail.com</p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/roldan-prado-a70893209/" target="_blank">linkedin.com/in/roldan-prado</a></p>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Roldan Prado</div>
+    <div class="footer-menu">
+      <h3>Menu</h3>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p>Phone: +63 976 050 7326</p>
+      <p>Email: pradoroldan00@gmail.com</p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/roldan-prado-a70893209/" target="_blank">linkedin.com/in/roldan-prado</a></p>
+    </div>
+    <div class="footer-form">
+      <h3>Contact Form</h3>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    <div class="copyright">© 2025 Roldan Sapitula Prado. All Rights Reserved.</div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById("burger");
+    const menu = document.getElementById("menu");
+    const burgerLines = burger.querySelectorAll("div");
+
+    burger.addEventListener("click", () => {
+      if (menu.classList.contains("show")) {
+        menu.classList.remove("show");
+        menu.classList.add("hide");
+        setTimeout(() => menu.classList.remove("hide"), 400);
+      } else {
+        menu.classList.add("show");
+      }
+      burger.classList.toggle("active");
+    });
+
+    // Dynamic color switching with smooth animation based on scroll background brightness and scroll direction
+    let lastScroll = 0;
+    function getLuminance(rgb) {
+      const r = rgb[0] / 255;
+      const g = rgb[1] / 255;
+      const b = rgb[2] / 255;
+      return 0.299 * r + 0.587 * g + 0.114 * b;
+    }
+
+    function parseRGB(color) {
+      const result = color.match(/rgb\\((\\d+), (\\d+), (\\d+)\\)/);
+      return result ? [parseInt(result[1]), parseInt(result[2]), parseInt(result[3])] : [255,255,255];
+    }
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.scrollY;
+      const scrollingUp = currentScroll < lastScroll;
+      lastScroll = currentScroll;
+
+      const section = document.elementFromPoint(window.innerWidth - 30, 30);
+      if (section) {
+        const style = window.getComputedStyle(section);
+        const bgColor = style.backgroundColor;
+        const rgb = parseRGB(bgColor);
+        const luminance = getLuminance(rgb);
+        if ((luminance > 0.5 && !scrollingUp) || (luminance <= 0.5 && scrollingUp)) {
+          burgerLines.forEach(line => {
+            line.style.transition = "background 0.6s ease, box-shadow 0.6s ease";
+            line.style.background = "#000";
+            line.style.boxShadow = "0 0 6px rgba(255,255,255,0.6)";
+          });
+        } else {
+          burgerLines.forEach(line => {
+            line.style.transition = "background 0.6s ease, box-shadow 0.6s ease";
+            line.style.background = "#fff";
+            line.style.boxShadow = "0 0 6px rgba(0,0,0,0.6)";
+          });
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
