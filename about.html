@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us — TechnoDream Web Designs</title>
+
+  <!-- Basic SEO -->
+  <meta name="description" content="TechnoDream Web Designs — modern, responsive WordPress websites. Meet Roldan Prado, web developer.">
+
+  <!-- Styles (embedded for single-file demo) -->
+  <style>
+    :root{
+      --bg: #f7f9fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #0ea5a4; /* teal-ish */
+      --accent-dark: #0b8b88;
+      --radius: 14px;
+      --max-width: 980px;
+      --page-padding: 20px;
+      --shadow: 0 6px 20px rgba(16,24,40,0.08);
+      --glass: rgba(255,255,255,0.6);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* Reset & base */
+    *{box-sizing: border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, #f3f6f8 0%, var(--bg) 100%);
+      color: #0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:40px var(--page-padding);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:16px;
+    }
+
+    /* Container */
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px;
+      align-items:start;
+    }
+
+    /* Card for logo + photo */
+    .side{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:26px;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      align-items:center;
+      text-align:center;
+    }
+
+    .logo{
+      width:110px;
+      height:110px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      color:white;
+      font-weight:700;
+      font-size:32px;
+      box-shadow: 0 8px 24px rgba(14,165,164,0.18);
+    }
+
+    .photo{
+      width:100%;
+      border-radius:10px;
+      overflow:hidden;
+      max-height:210px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    }
+
+    .photo img{display:block;width:100%;height:auto}
+
+    .side h3{margin:0;font-size:18px}
+    .side p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Main content */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      margin:0 0 8px 0;
+      font-size:28px;
+      letter-spacing:-0.2px;
+    }
+
+    .subtitle{
+      margin:0 0 20px 0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .box{
+      background:transparent;
+      border-radius:12px;
+      padding:14px;
+      border:1px solid rgba(15,23,42,0.04);
+    }
+
+    .box h4{margin:0 0 8px 0;font-size:16px}
+    .box p{margin:0;color:var(--muted);font-size:14px}
+
+    .bio{
+      margin-top:18px;
+      color:#0f172a;
+      font-size:15px;
+    }
+
+    /* Buttons / links */
+    .actions{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:15px;
+      transition:transform 120ms ease, box-shadow 120ms ease;
+      border: none;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent),var(--accent-dark));
+      color:white;
+      box-shadow: 0 10px 24px rgba(11,139,136,0.12);
+    }
+
+    .btn-outline{
+      background:transparent;
+      border:1px solid rgba(15,23,42,0.06);
+      color: #0f172a;
+    }
+
+    .btn:active{transform:translateY(1px)}
+    .btn:hover{transform:translateY(-4px)}
+
+    /* Footer small text */
+    .meta{
+      margin-top:20px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* Responsive */
+    @media (max-width:920px){
+      .wrap{grid-template-columns: 1fr; padding:0}
+      body{padding:28px var(--page-padding)}
+    }
+
+    @media (max-width:420px){
+      h1{font-size:22px}
+      .logo{width:88px;height:88px;font-size:26px}
+    }
+
+  </style>
+</head>
+<body>
+
+  <main class="wrap" role="main" aria-labelledby="page-title">
+
+    <!-- left column: logo + image -->
+    <aside class="side" aria-label="Profile and logo">
+      <!-- Editable SVG logo placeholder (replace with your image) -->
+      <div class="logo" aria-hidden="true">
+        <!-- Two-letter mark (initials) -->
+        RP
+      </div>
+
+      <h3>TechnoDream Web Designs</h3>
+      <p>Responsive WordPress & web solutions</p>
+
+      <!-- Photo / hero image - replace src with your image if you like -->
+      <figure class="photo" aria-hidden="false">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3f1a6f3b6dfc2f9f9f2a9c92b9b4e0c8"
+             alt="Workspace with laptop and notes — representative image">
+      </figure>
+
+      <p style="font-size:13px;color:var(--muted)">Serving small businesses & creatives since 2021</p>
+    </aside>
+
+
+    <!-- right column: about content -->
+    <article class="card" tabindex="0">
+
+      <header>
+        <h1 id="page-title">About Us</h1>
+        <p class="subtitle">We build clean, performant WordPress websites that help businesses grow online.</p>
+      </header>
+
+      <section class="grid" aria-label="Key information">
+        <div class="box" aria-labelledby="mission-title">
+          <h4 id="mission-title">Our Mission</h4>
+          <p>To convert ideas into functional, fast, and accessible websites that look great on every device.</p>
+        </div>
+
+        <div class="box" aria-labelledby="services-title">
+          <h4 id="services-title">What We Do</h4>
+          <p>WordPress themes, custom templates, site performance, SEO basics, and simple e-commerce.</p>
+        </div>
+      </section>
+
+      <section class="bio" aria-label="Meet the developer">
+        <h3 style="margin:0 0 10px 0;font-size:18px">Meet the Developer</h3>
+        <p>Hi — I’m <strong>Roldan Prado</strong>, a Web Developer with 4+ years of experience specializing in WordPress, HTML, CSS, and JavaScript. I enjoy taking a design brief from concept to a polished, responsive site that performs well and is easy to manage.</p>
+
+        <div class="actions" aria-label="Useful links">
+          <!-- Link 1: Portfolio -->
+          <a class="btn btn-primary" href="http://my-wp-portfolio.page.gd/" target="_blank" rel="noopener noreferrer">
+            View Portfolio
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <!-- Link 2: Instagram / Social -->
+          <a class="btn btn-outline" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            Follow on Instagram
+          </a>
+        </div>
+
+        <p class="meta">Want this layout for your WordPress About page? You can paste the copy into a "Group" or "Columns" block and upload your logo + image.</p>
+      </section>
+
+    </article>
+  </main>
+
+</body>
+</html>
