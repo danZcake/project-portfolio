@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pin-style Masonry Gallery — Demo</title>
+
+<!-- Basic reset + fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg1: #0f172a;
+    --bg2: #08203a;
+    --glass: rgba(255,255,255,0.06);
+    --glass-2: rgba(255,255,255,0.04);
+    --accent: #7c5cff;
+    --muted: rgba(255,255,255,0.6);
+    --card-radius: 14px;
+    --shadow: 0 6px 24px rgba(2,6,23,0.6);
+    --gap: 18px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,var(--bg1),var(--bg2));
+    color: #e6eef8;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:36px;
+    line-height:1.35;
+  }
+
+  /* Header */
+  .header{
+    position: sticky;
+    top:18px;
+    z-index:40;
+    display:flex;
+    gap:18px;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px;
+    backdrop-filter: blur(8px) saturate(120%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:16px;
+    box-shadow: var(--shadow);
+  }
+  .brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .logo{
+    width:44px;height:44px;border-radius:12px;
+    background: linear-gradient(135deg,var(--accent),#ff7ab6);
+    display:grid;place-items:center;
+    font-weight:800;color:white;font-size:18px;
+    box-shadow: 0 6px 18px rgba(124,92,255,0.16), inset 0 -8px 30px rgba(255,255,255,0.04);
+  }
+  .title{
+    display:flex;flex-direction:column;
+    line-height:1;
+  }
+  .title .h{font-weight:700;font-size:14px}
+  .title .sub{font-size:12px;color:var(--muted)}
+
+  /* controls */
+  .controls{
+    display:flex;gap:12px;align-items:center;
+  }
+  .search{
+    display:flex;align-items:center;
+    background:var(--glass);
+    border-radius:999px;padding:8px 12px;gap:8px;
+    min-width:220px;
+  }
+  .search input{
+    background:transparent;border:0;outline:none;color:inherit;font-size:14px;
+  }
+  .btn{
+    background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+    border:1px solid rgba(255,255,255,0.04);
+    padding:8px 12px;border-radius:999px;font-weight:600;cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s;
+  }
+  .btn:hover{ transform:translateY(-3px); box-shadow: 0 12px 30px rgba(2,6,23,0.6) }
+
+  /* masonry wrapper using CSS columns for Pinterest feel */
+  .masonry-wrap{
+    margin-top:26px;
+    column-gap: var(--gap);
+    /* responsive column counts */
+    column-count: 1;
+  }
+  @media(min-width:640px){ .masonry-wrap{ column-count:2 } }
+  @media(min-width:980px){ .masonry-wrap{ column-count:3 } }
+  @media(min-width:1250px){ .masonry-wrap{ column-count:4 } }
+
+  .card{
+    display:inline-block;
+    width:100%;
+    margin:0 0 var(--gap);
+    border-radius: var(--card-radius);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    overflow:hidden;
+    transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s;
+    position:relative;
+    break-inside: avoid;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.5);
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .card img{
+    width:100%;height:auto;display:block;
+    transform-origin:center;
+    transition: transform .5s cubic-bezier(.2,.9,.2,1);
+  }
+
+  .card:hover{ transform: translateY(-8px); box-shadow: 0 18px 40px rgba(2,6,23,0.6) }
+  .card:hover img{ transform: scale(1.03) rotate(.2deg) }
+
+  .card .meta{
+    padding:12px;
+    display:flex;gap:10px;align-items:center;justify-content:space-between;
+  }
+  .user{
+    display:flex;gap:10px;align-items:center;
+  }
+  .avatar{
+    width:36px;height:36px;border-radius:10px;background:linear-gradient(180deg,#ffffff22,#00000022);display:block;
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .user .name{font-weight:600;font-size:14px}
+  .user .role{font-size:12px;color:var(--muted)}
+
+  .actions{display:flex;gap:8px;align-items:center}
+  .icon-btn{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:700;border:1px solid rgba(255,255,255,0.03);background:var(--glass);cursor:pointer}
+
+  /* caption / description */
+  .caption{
+    padding:0 12px 16px 12px;
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  /* Floating lightbox modal */
+  .lightbox{
+    position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.7);
+    z-index:60;padding:28px;
+  }
+  .lightbox.open{ display:flex }
+  .lb-inner{
+    max-width:1100px;width:100%;max-height:90vh;background:linear-gradient(180deg, #0b1220, #071522);
+    border-radius:12px;overflow:hidden;display:flex;flex-direction:column;
+    box-shadow: 0 30px 80px rgba(2,6,23,0.8);
+  }
+  .lb-img{flex:1;display:grid;place-items:center;padding:18px}
+  .lb-img img{ max-width:100%; max-height:78vh; display:block; border-radius:6px }
+  .lb-meta{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.02)}
+  .close{cursor:pointer;padding:8px;border-radius:8px}
+  .muted{color:var(--muted)}
+
+  /* small helpers */
+  .label{font-size:12px;color:var(--muted);font-weight:600}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* Load more area */
+  .load-more{
+    display:flex;justify-content:center;margin-top:28px;
+  }
+
+  /* Responsive spacing for page */
+  @media(max-width:480px){
+    body{padding:14px}
+    .header{padding:8px}
+    .title .h{font-size:13px}
+  }
+</style>
+</head>
+<body>
+
+  <header class="header" role="banner" aria-label="Top bar">
+    <div class="brand">
+      <div class="logo">P</div>
+      <div class="title">
+        <div class="h">PinGrid</div>
+        <div class="sub">Inspiration board</div>
+      </div>
+    </div>
+
+    <div class="controls" role="region" aria-label="Controls">
+      <div class="search" title="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><path stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"></path><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.4"></circle></svg>
+        <input id="searchInput" placeholder="Search images, tags..." aria-label="Search images" />
+      </div>
+      <button id="shuffleBtn" class="btn" title="Shuffle">Shuffle</button>
+      <button id="addBtn" class="btn" title="Add sample">+ Add</button>
+    </div>
+  </header>
+
+  <!-- masonry container -->
+  <main>
+    <section id="gallery" class="masonry-wrap" aria-live="polite" aria-label="Image gallery">
+      <!-- Cards (sample) -->
+      <!-- We'll populate cards via JS for convenience -->
+    </section>
+
+    <div class="load-more">
+      <button id="loadMore" class="btn">Load more</button>
+    </div>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lb-inner" role="document">
+      <div class="lb-img" id="lbImgWrap">
+        <img id="lbImage" alt="">
+      </div>
+      <div class="lb-meta">
+        <div>
+          <div id="lbTitle" style="font-weight:700">Image title</div>
+          <div class="muted" id="lbSubtitle">by — author</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <a id="lbDownload" class="btn" download target="_blank">Download</a>
+          <div id="lbClose" class="close" title="Close" aria-label="Close">✕</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/*
+  Pin-style Masonry demo script
+  - builds initial dataset
+  - supports search, shuffle, add-sample, load-more
+  - lightbox modal with download
+*/
+
+const sampleData = [
+  // these are Unsplash direct image links for demo purposes.
+  // Replace with your own image URLs as needed.
+  {src:'https://images.unsplash.com/photo-1524594154906-5b5b0b53f2d8?w=1200&q=80&auto=format&fit=crop', title:'Warm wood table', author:'E. Roberts', desc:'Sleek interior with warm lighting'},
+  {src:'https://images.unsplash.com/photo-1503342452485-86a9a86fbf7d?w=1200&q=80&auto=format&fit=crop', title:'Minimal workspace', author:'S. Park', desc:'Clean desk, perfect for focus'},
+  {src:'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&q=80&auto=format&fit=crop', title:'Architectural lines', author:'M. Lee', desc:'Modern architecture study'},
+  {src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=80&auto=format&fit=crop', title:'Cozy corner', author:'A. Kaur', desc:'Soft textures and natural light'},
+  {src:'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1200&q=80&auto=format&fit=crop', title:'Gradient sky', author:'P. Ramos', desc:'Sunset hues and calm'},
+  {src:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=1200&q=80&auto=format&fit=crop', title:'Pattern study', author:'C. Gomez', desc:'Repeated patterns create rhythm'},
+  {src:'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1200&q=80&auto=format&fit=crop', title:'Greenroom', author:'L. Chen', desc:'Plants breathing life into the room'},
+  {src:'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=1200&q=80&auto=format&fit=crop', title:'Café still life', author:'N. Patel', desc:'Latte art and morning light'},
+  {src:'https://images.unsplash.com/photo-1519699047748-de8e0b11f3b0?w=1200&q=80&auto=format&fit=crop', title:'Serene scene', author:'T. Nguyen', desc:'Wide open quiet'},
+  {src:'https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?w=1200&q=80&auto=format&fit=crop', title:'Retro textures', author:'D. Silva', desc:'Muted tones and nostalgia'}
+];
+
+const gallery = document.getElementById('gallery');
+const searchInput = document.getElementById('searchInput');
+const shuffleBtn = document.getElementById('shuffleBtn');
+const addBtn = document.getElementById('addBtn');
+const loadMore = document.getElementById('loadMore');
+
+let DATA = [...sampleData];
+let rendered = 0;
+const PER_PAGE = 6;
+
+// utility to create a card node
+function createCard(item){
+  const card = document.createElement('article');
+  card.className = 'card';
+  card.setAttribute('tabindex', '0');
+  card.innerHTML = `
+    <div class="imgwrap">
+      <img loading="lazy" src="${item.src}" alt="${escapeHtml(item.title)}" />
+    </div>
+    <div class="meta">
+      <div class="user">
+        <div class="avatar" aria-hidden></div>
+        <div>
+          <div class="name">${escapeHtml(item.title)}</div>
+          <div class="role muted">${escapeHtml(item.author)}</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="icon-btn view" title="View">🔍</button>
+      </div>
+    </div>
+    <div class="caption">${escapeHtml(item.desc || '')}</div>
+  `;
+  // click to open lightbox
+  card.querySelector('.view').addEventListener('click', () => openLightbox(item));
+  // allow keyboard ENTER to open
+  card.addEventListener('keydown', (e) => { if(e.key==='Enter') openLightbox(item); });
+  return card;
+}
+
+function renderNext(){
+  const to = Math.min(rendered + PER_PAGE, DATA.length);
+  for(let i=rendered;i<to;i++){
+    gallery.appendChild(createCard(DATA[i]));
+  }
+  rendered = to;
+  if(rendered >= DATA.length) loadMore.style.display='none';
+  else loadMore.style.display='flex';
+}
+
+function clearGallery(){ gallery.innerHTML=''; rendered = 0; loadMore.style.display='flex'; }
+
+function doSearch(q){
+  q = q.trim().toLowerCase();
+  if(!q){ DATA = [...sampleData]; } // reset to base
+  else {
+    DATA = sampleData.filter(it => (it.title+ ' ' + (it.desc||'') + ' ' + it.author).toLowerCase().includes(q));
+  }
+  clearGallery();
+  renderNext();
+}
+
+// shuffle
+function shuffleArray(a){
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+// add-sample: clones a random sample and push to data
+function addSample(){
+  const r = sampleData[Math.floor(Math.random()*sampleData.length)];
+  // create copy with slight modification
+  const copy = {...r, title: r.title + ' ✦', desc: r.desc + ' — new'};
+  sampleData.unshift(copy);
+  doSearch(searchInput.value);
+}
+
+/* Lightbox */
+const lightbox = document.getElementById('lightbox');
+const lbImage = document.getElementById('lbImage');
+const lbTitle = document.getElementById('lbTitle');
+const lbSubtitle = document.getElementById('lbSubtitle');
+const lbClose = document.getElementById('lbClose');
+const lbDownload = document.getElementById('lbDownload');
+
+function openLightbox(item){
+  lbImage.src = item.src;
+  lbImage.alt = item.title;
+  lbTitle.textContent = item.title;
+  lbSubtitle.textContent = 'by ' + item.author;
+  lbDownload.href = item.src + '&dl=1'; // unsplash style hint; user should replace as appropriate
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+
+lbClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+
+/* helpers */
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+
+/* initial render */
+doSearch(''); // renders first page
+
+/* UI bindings */
+searchInput.addEventListener('input', ()=> {
+  // small debounce
+  clearTimeout(searchInput._t);
+  searchInput._t = setTimeout(()=> doSearch(searchInput.value), 220);
+});
+shuffleBtn.addEventListener('click', ()=> {
+  sampleData = shuffleArray(sampleData);
+  doSearch(searchInput.value);
+});
+addBtn.addEventListener('click', addSample);
+loadMore.addEventListener('click', renderNext);
+
+/* accessibility: focus trap for lightbox not implemented for brevity; consider adding for production */
+</script>
+
+</body>
+</html>
