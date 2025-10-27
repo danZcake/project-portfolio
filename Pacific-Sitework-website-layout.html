@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pacific Sitework — Excavation & Site Preparation</title>
+  <meta name="description" content="Pacific Sitework — Excavation, Pipework & Site Preparation" />
+  <style>
+    :root{
+      --yellow:#f3b21a;
+      --dark:#111213;
+      --muted:#2b2b2b;
+      --card:#ffffff;
+      --accent:#ffb84d;
+      --max-width:1200px;
+      --radius:12px;
+      --container-padding:20px;
+      --glass: rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#eee; background:#0f0f0f}
+    a{color:inherit;text-decoration:none}
+
+    .site{max-width:var(--max-width);margin:0 auto}
+
+    /* Header */
+    header{position:fixed;left:0;right:0;top:0;z-index:50;padding:14px 24px;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.12));backdrop-filter: blur(4px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:var(--max-width);margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand .logo{width:48px;height:48px;background:var(--yellow);border-radius:6px;display:grid;place-items:center;font-weight:700;color:#111}
+    nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
+    .cta{background:var(--yellow);color:#111;padding:10px 16px;border-radius:999px;font-weight:700}
+    .menu-toggle{display:none}
+
+    /* Hero */
+    .hero{position:relative;margin-top:84px}
+    .hero .hero-bg{height:520px;background-image:url('/mnt/data/pacificsitework.com_MAY012025.fw.png');background-size:cover;background-position:center;filter:contrast(.95) saturate(.9)}
+    .hero .over{position:absolute;inset:0;display:flex;align-items:center;padding:40px}
+    .hero .left{max-width:640px}
+    .eyebrow{letter-spacing:2px;color:var(--accent);font-weight:700;font-size:13px}
+    h1{font-size:42px;margin:14px 0;line-height:1.02}
+    p.lead{opacity:0.95;color:#fff;max-width:520px}
+    .btn{display:inline-block;background:var(--yellow);color:#111;padding:12px 20px;border-radius:999px;margin-top:18px;font-weight:700}
+
+    /* Diagonal break */
+    .divider{height:40px;background:linear-gradient(90deg, transparent 40%, var(--yellow) 40% 60%, transparent 60%);}
+
+    /* Intro */
+    .intro{background:#171717;padding:64px 24px}
+    .intro-inner{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start}
+    .intro h2{color:var(--yellow);margin:0 0 8px}
+    .intro p{color:#d6d6d6}
+    .service-list{margin-top:18px;color:#cfcfcf}
+    .intro .image{height:260px;background:#222;border-radius:8px;overflow:hidden}
+
+    /* Services */
+    .services{padding:64px 24px;background:#0e0e0e}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto}
+    .service-card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:18px;border-radius:10px;min-height:260px}
+    .service-card h3{margin:10px 0 6px}
+    .service-card p{color:#cfcfcf}
+
+    /* Gallery */
+    .gallery{padding:48px 24px}
+    .gallery .title{max-width:var(--max-width);margin:0 auto 18px;color:var(--yellow);text-align:center;font-weight:800}
+    .gallery .big{height:360px;background:#1b1b1b;border-radius:8px;overflow:hidden;max-width:1100px;margin:0 auto}
+    .gallery img{width:100%;height:100%;object-fit:cover}
+
+    /* About */
+    .about{padding:64px 24px;background:#121212}
+    .about-inner{display:grid;grid-template-columns:1fr 360px;gap:26px;align-items:center}
+    .about .card{background:var(--glass);padding:18px;border-radius:10px}
+
+    /* Testimonials */
+    .testimonials{padding:64px 24px}
+    .test-row{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+    .testimonial{background:#fff;color:#222;padding:18px;border-radius:10px;width:300px;box-shadow:0 6px 18px rgba(0,0,0,0.35)}
+    .testimonial .meta{display:flex;gap:12px;align-items:center}
+    .avatar{width:44px;height:44px;border-radius:50%;background:#d9d9ff;display:grid;place-items:center;color:#333;font-weight:700}
+
+    /* Contact */
+    .contact{padding:48px 24px;background:#0f0f0f}
+    .contact-form{max-width:920px;margin:0 auto;background:#fff;color:#111;padding:20px;border-radius:10px}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    input,textarea{width:100%;padding:10px;border-radius:6px;border:1px solid #ddd}
+    textarea{min-height:120px}
+    .submit{background:var(--yellow);border:none;padding:10px 16px;border-radius:8px;font-weight:700}
+
+    footer{padding:20px;color:#bbb;text-align:center}
+
+    /* Responsive */
+    @media(max-width:980px){
+      .intro-inner,.about-inner{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:1fr 1fr}
+      .hero .hero-bg{height:420px}
+    }
+    @media(max-width:680px){
+      .nav ul{display:none}
+      .menu-toggle{display:block;background:transparent;border:2px solid rgba(255,255,255,0.06);padding:8px;border-radius:8px}
+      .services-grid{grid-template-columns:1fr}
+      .hero .hero-bg{height:360px}
+      .eyebrow{font-size:12px}
+      h1{font-size:28px}
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav site">
+      <div class="brand"><div class="logo">PS</div><div class="brand-text"><strong style="font-size:18px">Pacific</strong><div style="font-size:12px;color:#cfcfcf">Sitework</div></div></div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="cta" href="tel:+14252706497">Call Us Today</a>
+        <button class="menu-toggle" aria-label="menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-bg"></div>
+      <div class="over site">
+        <div class="left">
+          <div class="eyebrow">PACIFIC SITEWORK</div>
+          <h1>Excavation, Pipework &amp; Site Preparation.</h1>
+          <p class="lead">We specialize in excavation, grading, and underground utility installation for residential and commercial customers. Safe. Reliable. On time.</p>
+          <a class="btn" href="#contact">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="intro">
+      <div class="site intro-inner">
+        <div>
+          <h2>Welcome to <span style="color:var(--yellow)">Pacific Sitework</span></h2>
+          <p>Pacific Sitework specializes in Excavation, Grading, and Underground Utility Installation for residential and small commercial customers. When it comes to foundation excavation, utilities, or site leveling — we do it all.</p>
+          <ul class="service-list">
+            <li>Excavation &amp; Grading</li>
+            <li>Site Preparation</li>
+            <li>Roadway Crossings</li>
+            <li>Foundations</li>
+            <li>Driveway Construction</li>
+            <li>Shoreline Restoration</li>
+          </ul>
+          <a class="btn" href="#contact">Contact Us</a>
+        </div>
+        <div>
+          <div class="image"><img src="/mnt/data/pacificsitework.com_MAY012025.fw.png" alt="excavator" style="width:100%;height:100%;object-fit:cover"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="site">
+        <h2 style="color:#fff;text-align:center;margin-bottom:18px">Our Services</h2>
+        <div class="services-grid">
+          <article class="service-card">
+            <h3>Excavation</h3>
+            <p>Site clearing, mass excavation, trenching and grading for residential and commercial needs.</p>
+          </article>
+          <article class="service-card">
+            <h3>Pipework</h3>
+            <p>Stormwater, sanitary, and utility pipeline installation and repairs — certified crews and tested work.</p>
+          </article>
+          <article class="service-card">
+            <h3>Site Preparation</h3>
+            <p>Preparation for foundations, driveways, and landscaping — we grade, compact and ensure proper drainage.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+      <div class="title">Recent Works — <strong style="color:#fff">Our Gallery</strong></div>
+      <div class="big">
+        <img src="/mnt/data/pacificsitework.com_MAY012025.fw.png" alt="project"/>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="site about-inner">
+        <div>
+          <h2 style="color:var(--yellow)">About Pacific Sitework</h2>
+          <p>As a member of the Operating Engineers Local 302 since 1998, our crews bring decades of experience. We focus on safety, quality workmanship and long-term value for our customers.</p>
+          <a class="btn" href="tel:+14252706497">Call Us Today</a>
+        </div>
+        <div>
+          <div class="card">
+            <img src="/mnt/data/pacificsitework.com_MAY012025.fw.png" style="width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:12px">
+            <p style="color:#dcdcdc">Focused on long-term success, relation-building, and delivering value.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+      <div class="site">
+        <h2 style="color:var(--yellow);text-align:center;margin-bottom:18px">Testimonials</h2>
+        <div class="test-row">
+          <div class="testimonial">
+            <div class="meta"><div class="avatar">J</div><div><strong>John M</strong><div style="font-size:13px;color:#777">Homeowner</div></div></div>
+            <p style="margin-top:12px;color:#444">Excellent, on time and on budget. The crew was professional and left the site clean.</p>
+          </div>
+          <div class="testimonial">
+            <div class="meta"><div class="avatar">A</div><div><strong>Ana C</strong><div style="font-size:13px;color:#777">Contractor</div></div></div>
+            <p style="margin-top:12px;color:#444">Reliable team for our pipeline installation — communication was great throughout.</p>
+          </div>
+          <div class="testimonial">
+            <div class="meta"><div class="avatar">B</div><div><strong>Brandon G</strong><div style="font-size:13px;color:#777">Developer</div></div></div>
+            <p style="margin-top:12px;color:#444">Highly recommended. They handled a tricky foundation excavation with care.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="site">
+        <h2 style="color:var(--yellow);text-align:center;margin-bottom:12px">Keep in touch — Contact Form</h2>
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="contact-grid">
+              <input type="text" id="name" name="name" placeholder="Name" required>
+              <input type="email" id="email" name="email" placeholder="Email" required>
+              <input type="text" id="phone" name="phone" placeholder="Phone">
+              <input type="text" id="subject" name="subject" placeholder="Subject">
+            </div>
+            <div style="margin-top:12px"><textarea id="message" name="message" placeholder="Message"></textarea></div>
+            <div style="margin-top:12px;display:flex;justify-content:flex-end"><button class="submit" type="submit">Submit Form</button></div>
+            <div id="formMsg" style="margin-top:12px;color:var(--yellow);font-weight:700"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="site">© <strong>Pacific Sitework</strong> — All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav ul');
+    toggle && toggle.addEventListener('click', ()=>{
+      if(nav.style.display === 'flex') nav.style.display = 'none'; else nav.style.display = 'flex';
+      nav.style.flexDirection = 'column';
+      nav.style.position = 'absolute';
+      nav.style.right = '24px';
+      nav.style.top = '68px';
+      nav.style.background = 'rgba(10,10,10,0.9)';
+      nav.style.padding = '12px';
+      nav.style.borderRadius = '8px';
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const href = this.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+
+    // Simple contact form handling
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      if(!name||!email||!msg){
+        document.getElementById('formMsg').textContent = 'Please fill name, email and message.';
+        return;
+      }
+      // Fake submit: show success message and clear form
+      document.getElementById('formMsg').textContent = 'Thanks! Your message has been received.';
+      form.reset();
+      setTimeout(()=>document.getElementById('formMsg').textContent = '',4500);
+    });
+  </script>
+</body>
+</html>
