@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Roldan Prado — Portfolio Résumé</title>
   <link href="styles/main-style.css" rel="stylesheet">
-  
+
 </head>
+
 <body data-theme="light">
   <button class="menu-toggle">☰</button>
   <div class="layout">
     <aside class="sidebar">
-      <div class="photo"><img src="Roldan-P-photo.jpg" alt="Roldan Prado" /></div>
+      <div class="photo"><img src="images/Personal/my-image.png" alt="Roldan Prado" /></div>
       <div class="name">Roldan Sapitula Prado</div>
       <div class="role">Web Developer / Programmer</div>
-      <button class="theme-toggle">🌙 Dark Mode</button>
       <nav>
         <ul class="nav-list">
           <li class="active"><a href="#home">Home</a></li>
@@ -29,6 +30,7 @@
         <p>📧 pradoroldan00@gmail.com</p>
         <p>📞 +63 976 050 7326</p>
         <p><a href="https://www.linkedin.com/in/roldan-prado-a70893209/" target="_blank">LinkedIn</a></p>
+        <button class="theme-toggle">🌙 Dark Mode</button>
       </div>
     </aside>
 
@@ -44,14 +46,89 @@
       </section>
 
       <section id="about">
-        <h3>About Me</h3>
-        <p>Detail-oriented Web Developer with experience building responsive, user-focused websites and web applications. Strong background in WordPress, front-end development, and e-commerce solutions.</p>
+        <div class="title-row">
+          <h1 class="title">ABOUT ME</h1>
+        </div>
+        <div class="lead fade-in stagger-3">
+          <strong>I'm Sarita Smith</strong>, <span style="font-weight:600">Graphic Designer / Photographer</span>
+          <p class="subtitle">Versatile creative with experience creating visual identities, web assets and photography.
+            I design with empathy and craft with attention to detail — focused on outcomes and delightful experiences.
+          </p>
+        </div>
+
+        <div class="lower">
+          <div class="what">
+            <div class="section-head">What I Do?</div>
+            <div class="what-list">
+              <div class="what-item fade-in stagger-1">
+                <div class="icon-circle">🎨</div>
+                <div>
+                  <h4>Print Design</h4>
+                  <p>Brochures, Posters, Packaging — designed for printing and production.</p>
+                </div>
+              </div>
+
+              <div class="what-item fade-in stagger-2">
+                <div class="icon-circle">🖥️</div>
+                <div>
+                  <h4>Web Design</h4>
+                  <p>Responsive UI design, landing pages and marketing sites with UX-first approach.</p>
+                </div>
+              </div>
+
+              <div class="what-item fade-in stagger-3">
+                <div class="icon-circle">📷</div>
+                <div>
+                  <h4>Photography</h4>
+                  <p>Commercial and portrait photography with natural, clean retouching.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fun">
+            <div class="section-head">Fun Facts</div>
+            <div class="fun-grid">
+              <div class="stat" data-target="10" data-suffix="+">
+                <div class="num">0</div>
+                <div class="label">Years Experience</div>
+              </div>
+
+              <div class="stat" data-target="450">
+                <div class="num">0</div>
+                <div class="label">Projects Done</div>
+              </div>
+
+              <div class="stat" data-target="65">
+                <div class="num">0</div>
+                <div class="label">Won Awards</div>
+              </div>
+
+              <div class="stat" data-target="300" data-suffix="+">
+                <div class="num">0</div>
+                <div class="label">Happy Clients</div>
+              </div>
+
+              <div class="stat" data-target="650000" data-format="k">
+                <div class="num">0</div>
+                <div class="label">Satisfied Followers</div>
+              </div>
+
+              <div class="stat" data-target="10" data-suffix="+">
+                <div class="num">0</div>
+                <div class="label">New Videos Each Month</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="resume">
         <h3>Resume</h3>
-        <p><b>Dream Webworks Creations Inc.</b> — Web Developer / Programmer<br />Aug 2021 – Jun 18, 2025, Baguio City, PH</p>
-        <p>Designed and developed responsive WordPress websites, created custom themes and plugins, implemented WooCommerce stores, performed testing/debugging, and maintained client sites.</p>
+        <p><b>Dream Webworks Creations Inc.</b> — Web Developer / Programmer<br />Aug 2021 – Jun 18, 2025, Baguio City,
+          PH</p>
+        <p>Designed and developed responsive WordPress websites, created custom themes and plugins, implemented
+          WooCommerce stores, performed testing/debugging, and maintained client sites.</p>
       </section>
 
       <section id="portfolio">
@@ -73,37 +150,7 @@
     </main>
   </div>
 
-  <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
-    const links = document.querySelectorAll('.nav-list a');
-    const sections = document.querySelectorAll('section');
-    const themeToggle = document.querySelector('.theme-toggle');
-    const body = document.body;
-
-    menuToggle.addEventListener('click', () => sidebar.classList.toggle('active'));
-
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        links.forEach(l => l.parentElement.classList.remove('active'));
-        link.parentElement.classList.add('active');
-        const target = link.getAttribute('href').replace('#', '');
-        sections.forEach(sec => sec.classList.remove('active'));
-        document.getElementById(target).classList.add('active');
-        sidebar.classList.remove('active');
-      });
-    });
-
-    themeToggle.addEventListener('click', () => {
-      if (body.getAttribute('data-theme') === 'dark') {
-        body.setAttribute('data-theme', 'light');
-        themeToggle.textContent = '🌙 Dark Mode';
-      } else {
-        body.setAttribute('data-theme', 'dark');
-        themeToggle.textContent = '☀️ Light Mode';
-      }
-    });
-  </script>
+  <script src="scripts/home-script.js"></script>
 </body>
+
 </html>
