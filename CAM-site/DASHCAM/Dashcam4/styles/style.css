@@ -1,0 +1,449 @@
+@font-face {
+  font-family: "socialico";
+  src: url("fonts/Socialico/Socialico.eot");
+  src: url("fonts/Socialico/Socialico.eot?#iefix") format("embedded-opentype"),
+    url("fonts/Socialico/Socialico.woff2") format("woff2"),
+    url("fonts/Socialico/Socialico.woff") format("woff"),
+    url("fonts/Socialico/Socialico.ttf") format("truetype"),
+    url("fonts/Socialico/Socialico.svg") format("svg");
+}
+
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('fonts/CenturyGothic/CenturyGothic.woff2') format('woff2'),
+        url('fonts/CenturyGothic/CenturyGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('fonts/CenturyGothic/CenturyGothic-Bold.woff2') format('woff2'),
+        url('fonts/CenturyGothic/CenturyGothic-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+.suspension-contain {
+  max-height: 980px;
+  overflow: hidden;
+  position: relative;
+}
+html.suspended {
+  background: rgba(0, 0, 0, 0.6);
+}
+body {
+  max-width: 100%;
+  min-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Century Gothic';
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+
+h1,
+h2{
+  padding: 17px 0;
+  margin: 0;
+  line-height: 1.2;
+  font-weight: bold;
+  font-size: 48px;
+}
+h1 span,
+h2 span{
+  color: #FF6533;
+}
+h3{
+  padding: 0;
+  margin: 0;
+  line-height: 1.2;
+  font-weight: bold;
+}
+h4,
+h5{
+  padding: 0;
+  margin: 0;
+  line-height: 1.2;
+  font-size: 18px;
+  font-weight: normal;
+}
+p{
+  font-size: 18px;
+}
+.row {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/*clearings*/
+.clear {
+  clear: both;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+}
+.clearfix {
+  display: block;
+}
+
+/*cookie*/
+.cc-animate.cc-revoke.cc-bottom {
+  font-size: 14px;
+  padding: 5px 10px;
+  position: fixed;
+  display: block !important;
+  -webkit-transform: none !important;
+      -ms-transform: none !important;
+          transform: none !important;
+  bottom: 0 !important;
+  left: 20px !important;
+}
+
+/*call to action*/
+.destroy-on-load,
+.cta {
+  display: none;
+}
+
+.buttons {
+  position: relative;
+  overflow: hidden;
+  font-family: 'Century Gothic';
+  font-size: 18px;
+  line-height: 1.2;
+  color: #fff;
+  display: inline-block;
+  padding: 20px 0;
+  width: 214px;
+  background: #FF6533;
+  text-align: center;
+}
+.flex{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+img{max-width: 100%;}
+
+/*------------------------------------header------------------------------------*/
+#header{
+  padding: 80px 0 15px;
+}
+#header .logo{
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: left;
+  display: block;
+}
+#header nav a#pull {display: block; color: #fff;  height: 59px;padding: 10px 0; max-width: 90px; height: 59px;width: 100%; position: fixed; top: 80px; right: 70px;}
+#header nav a#pull:after { content:""; background: url('../images/common/nav-icon.png') no-repeat; width: 59px; height: 59px; position: absolute; right: 15px; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%);}
+  
+#header nav {display:block; height: auto; }
+#header nav ul {background: #333;width: 100%; max-width: 250px;display: none; height: auto; position:fixed;top: 10%; right: 8%; list-style-type: none;padding: 0;}
+#header nav ul li { width: 100%;position: relative; }
+#header nav ul li a { display: block; float:none; padding: 10px 15px; font-size: 18px;color: #fff;}
+#header nav ul li.active-menu a, #header nav ul li a:hover{
+  background: #FF6533;
+
+}
+/*------------------------------------banner------------------------------------*/
+#banner {
+  background: url(../images/common/banner.jpg)no-repeat center left;
+  background-size: contain;
+  padding: 138px 0;
+}
+#banner .banner-text{
+  max-width: 540px;
+  margin: 0 0 0 auto;
+  text-align: left;
+  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+#banner h2{
+  font-size: 88px;
+}
+#banner h2 big{
+  font-size: 98px;
+}
+#banner h2 small{
+  font-size: 80px;
+}
+#banner .buttons{
+  margin-top: 31px;
+}
+
+/*------------------------------------content------------------------------------*/
+#content p a:hover{
+  color: #FF6533;
+}
+/*product section*/
+#product{
+  padding-top: 60px;
+}
+#product dl{
+  border: 1px solid #D6D6D6;
+  max-width: 465px;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 0 37px;
+}
+#product dl dd{
+  text-align: left;
+  margin: 0 27px 18px;
+}
+#product dd h3{
+  font-size: 24px;
+  color: #FF6533;
+  border-top: 5px solid #D6D6D6;
+  padding:  18px 0 10px;
+}
+#product dd p{
+  font-weight: bold;
+  margin: 0;
+}
+#product dl.middle{
+  margin: 0 80px 37px;
+}
+
+
+/*welcome section*/
+#welcome .text-holder{
+  text-align: left;
+  -ms-flex-preferred-size: 785px;
+      flex-basis: 785px;
+}
+#welcome p{
+  line-height: 167%;
+}
+#welcome .buttons{
+  margin-top: 44px;
+}
+
+/*bottom content*/
+#bottom{
+  background: #333333;
+}
+#bottom .text-holder{
+  text-align: left;
+  color: #fff;
+  -ms-flex-preferred-size: 782px;
+      flex-basis: 782px;
+  margin: 0 auto;
+  padding: 10px;
+}
+#bottom h2{
+  padding: 17px 0;
+}
+#bottom p{
+  line-height: 133%;
+}
+#bottom .buttons{
+  margin-top: 70px;
+}
+#bottom img{
+  display: block;
+  margin: 0 auto;
+}
+
+/*------------------------------------contact form messages-----------------------------------*/
+form .messages p {
+  display: none;
+  font-family: Arial !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  font-size: 16px !important;
+}
+form .loading {
+  display: none;
+}
+form .alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+form .alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+form .alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+form [type="submit"] {
+  margin: 20px auto;
+}
+
+/*------------------------contact form------------------------*/
+.ctc-form {
+  margin: 0 auto;
+  text-align: center;
+}
+.ctc-form input[type="text"],
+.ctc-form textarea {
+  font-family: Arial;
+  font-size: 16px;
+  color: #000;
+  height: 45px;
+  display: block;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 auto 8px;
+}
+.ctc-form textarea {
+  height: 120px;
+  padding-top: 10px;
+}
+.ctc-form button {
+  display: block;
+}
+.ctc-form .recap {
+  display: inline-block;
+}
+.ctc-form .g-recaptcha div {
+  margin: 0 auto 10px;
+}
+.ctc-form .ctc-hide {
+  display: none;
+}
+
+
+/*footer*/
+#footer {
+  background: url(../images/common/footer-wrapper.jpg)no-repeat center center/cover;
+  padding: 65px 0;
+}
+#footer h2{
+  color: #000000;
+  font-size: 30px;
+}
+#footer p{
+  line-height: 1.2;
+}
+#footer p.address{
+  max-width: 205px;
+  margin: 16px auto;
+}
+#footer p a:hover{
+  color: #FF6533;
+}
+
+/*navigation section*/
+#copyright{
+  background: #000000;
+  padding: 20px 0;
+}
+#copyright nav ul {
+  margin: 0;
+  padding: 0;
+}
+#copyright nav ul li {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 28px;
+}
+#copyright nav ul li a {
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.2;
+}
+#copyright nav ul li.active-menu a,
+#copyright nav ul li a:hover {
+  color: #FF6533;
+}
+#copyright p{
+  color: #fff;
+}
+/*inner pages*/
+.inner #content {
+  min-height: 400px;
+  padding: 40px 0;
+}
+
+/*privacy policy*/
+.inPrivacyBox {
+  max-width: 850px;
+  margin: 0 auto;
+}
+.inPrivacyBox p {
+  text-align: justify !important;
+}
+
+/** Responsive
+-------------------------------------------------------*/
+
+@media screen and (max-width: 980px){
+  body {min-width: 320px}
+  #header {padding-top: 10px;}
+  #header .row {width: 100%}
+  #header .logo{text-align: center; max-width:  100%;margin: 50px auto 0;}
+  #header nav a#pull{background: #000; max-width: 100%;right: 0;left: 0; top: 0; padding-bottom: 40px; height: 40px;z-index: 999;padding: 0;}
+  #header nav a#pull:after{background: url(../images/common/nav-icon-mobile.png)no-repeat center right; width: 20px; height: 20px;}
+  #header nav ul{max-width: 100%;right: 0;left: 0;top: 40px; z-index: 999;margin: 0;}
+  #header nav ul li a{text-align: left;}
+  #banner{background-position: center; background-size: cover;}
+  #banner .banner-text{max-width: 100%;padding: 30px 15px;text-align: center;}
+  #welcome .row, #bottom .flex{display: block;}
+  #welcome .text-holder{text-align: center;}
+  #bottom .text-holder{text-align: center; padding: 20px 10px;}
+  #product dl{margin: 0 0 20px!important;}
+  #copyright .row{display: block;}
+  .cta{background: #FF6533  url("../images/common/phonecall.png") no-repeat center center;border-bottom-left-radius: 40px;border-top: 2px solid #333 ;border-top-left-radius: 40px;bottom: 1%;display: block;height: 80px;position: fixed;right: 0;text-decoration: none; text-indent: -9999em;width: 100px;z-index: 999;}
+}
+@media screen and (max-width: 768px){
+  #banner h2{font-size: 50px;}
+  #banner h2 big{font-size: 60px;}
+  #banner h2 small{font-size: 40px;}
+  #banner h2 big span{display: unset;}
+  #banner h2 span{display: block;}
+  #copyright nav ul li{display: block;}
+  #copyright nav ul li{padding: 10px 0;}
+}
+@media screen and (max-width: 425px){
+  h1, h2{font-size: 40px;}
+  #banner h2{font-size: 30px;}
+  #banner h2 big{font-size: 40px;}
+  #banner h2 small{font-size: 20px;}
+  #banner h2 big span{display: unset;}
+  #banner h2 span{display: block;}
+  #product{padding-top: 0;}
+  #welcome .buttons{margin-bottom: 20px;}
+}

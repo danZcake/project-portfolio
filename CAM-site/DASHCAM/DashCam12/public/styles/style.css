@@ -1,0 +1,1244 @@
+@font-face {
+  font-family: "socialico";
+  src: url("fonts/Socialico/Socialico.eot");
+  src: url("fonts/Socialico/Socialico.eot?#iefix") format("embedded-opentype"),
+    url("fonts/Socialico/Socialico.woff2") format("woff2"),
+    url("fonts/Socialico/Socialico.woff") format("woff"),
+    url("fonts/Socialico/Socialico.ttf") format("truetype"),
+    url("fonts/Socialico/Socialico.svg") format("svg");
+}
+
+@font-face {
+  font-family: "socialico-plus";
+  src: url("fonts/SocialicoPlus/socialico-plus.eot");
+  src: url("fonts/SocialicoPlus/socialico-plus.eot?#iefix")
+      format("embedded-opentype"),
+    url("fonts/SocialicoPlus/socialico-plus.woff2") format("woff2"),
+    url("fonts/SocialicoPlus/socialico-plus.woff") format("woff"),
+    url("fonts/SocialicoPlus/socialico-plus.ttf") format("truetype"),
+    url("fonts/SocialicoPlus/socialico-plus.svg") format("svg");
+}
+
+@font-face {
+  font-family: "CenturyGothic";
+  src: url("fonts/CenturyGothic/CenturyGothic.eot");
+  src: url("fonts/CenturyGothic/CenturyGothic.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("fonts/CenturyGothic/CenturyGothic.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("fonts/CenturyGothic/CenturyGothic.woff")
+      format("woff"),
+    /* Pretty Modern Browsers */ url("fonts/CenturyGothic/CenturyGothic.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("onts/CenturyGothic/CenturyGothic.svg")
+      format("svg"); /* Legacy iOS */
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.suspension-contain {
+  max-height: 980px;
+  overflow: hidden;
+  position: relative;
+}
+
+html.suspended {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+body {
+  max-width: 100%;
+  min-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  background: #eff3f7;
+  font-family: 'Poppins'
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  padding: 0;
+  margin: 0;
+  line-height: 120%;
+}
+
+h2 span {
+  color: hsl(225deg 100% 60%);
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+p {
+  margin: 0;
+}
+
+.row {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*Floats*/
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+/*Typography*/
+.text-primary {
+  color: #b11414;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+/*Clearings*/
+.clear {
+  clear: both;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+}
+
+.clearfix {
+  display: block;
+}
+
+/*Cookies*/
+.cc-animate.cc-revoke.cc-bottom {
+  font-size: 14px;
+  padding: 5px 10px;
+  position: fixed;
+  display: block !important;
+  transform: none !important;
+  bottom: 0 !important;
+  left: 20px !important;
+}
+
+/*Call to Action*/
+.destroy-on-load,
+.cta {
+  display: none;
+}
+
+/*Gallery*/
+#content .gallery-container {
+  text-align: center;
+}
+
+#content .gallery {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#content .gallery li {
+  display: inline-block;
+}
+
+#content .thumbnail {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: block;
+  line-height: 0.42857;
+  margin-bottom: 20px;
+  padding: 4px;
+  transition: border 0.5s ease-in-out 0s;
+}
+
+#content .thumbnail:hover {
+  transform: scale(1.02);
+}
+
+#content .page_navigation {
+  display: inline-block;
+}
+
+#content .page_link,
+#content .previous_link,
+#content .next_link,
+#content .first_link,
+#content .last_link,
+#content .ellipse {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #0275d8;
+  display: inline-block;
+  line-height: 1.25;
+  margin-left: -1px;
+  padding: 0.5rem 0.75rem;
+  position: relative;
+}
+
+#content .page_navigation > a:hover,
+.page_navigation > a.active_page {
+  background-color: #eceeef;
+  border-color: #ddd;
+  color: #014c8c;
+  text-decoration: none;
+}
+
+.buttons {
+  width: 320px;
+  height: 48px;
+  border-radius: 30px;
+  padding: 14px 34px 14px 62px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 120%;
+  position: relative;
+}
+
+.buttons.black {
+  background-color: transparent;
+  color: #fff;
+}
+
+.buttons.black:hover {
+  background: #3366ff;
+} 
+
+.buttons.blue {
+  background-color: hsl(225deg 100% 60%);
+}
+
+a.buttons.blue.shop {
+    margin: auto;
+}
+
+a.buttons.blue.shop, 
+a.buttons.black.shop,
+.buttons.phone {
+  justify-content: left;
+  padding-left: 30px;
+}
+
+.buttons.shop::after {
+  content: "";
+  width: 45px;
+  height: 25px;
+  position: absolute;
+  right: 22px;
+  background-size: 100% 100%;
+  background: url(../images/common/shop.png) no-repeat;
+}
+
+.buttons.phone::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 22px;
+  background-size: 100% 100%;
+  background: url(../images/common/phone.png) no-repeat;
+}
+
+/*Header*/
+#header {
+  padding: 10px 30px 10px 20px;
+}
+
+#header .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#header .row .inside {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#header .inside nav {
+  margin-right: 50px;
+}
+
+#header nav a#pull {
+  display: none;
+}
+
+#header nav ul {
+  margin: 0;
+  padding: 0;
+  column-gap: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+}
+
+#header nav ul li a {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+#header nav ul li.active-menu a,
+#header nav ul li a:hover {
+  color: hsl(225deg 100% 60%);
+  font-weight: 700;
+}
+
+#header .buttons {
+  width: 274px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/*Banner*/
+#banner {
+  text-align: left;
+  position: relative;
+  margin-bottom: 140px;
+  margin-top: 70px;
+}
+
+#banner .row {
+    display: flex;
+}
+
+.banner-text {
+    flex: 100%;
+}
+
+#banner h2 {
+  color: #000000;
+  font-size: 55px;
+  padding: 10px 0 23px;
+  font-family: sans-serif;
+  font-weight: 800;
+}
+
+#banner h3 {
+  font-weight: 600;
+}
+
+#banner p {
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 167%;
+  max-width: 658px;
+  padding-bottom: 50px;
+  font-family: "Poppins", sans-serif;
+}
+
+#banner small {
+  display: block;
+  font-size: 54px;
+}
+
+#banner .buttons {
+  margin-left: 0px;
+}
+
+#banner img {
+    height: 100%;
+    width: 100%;
+}
+
+/*Home Page*/
+.products {
+  padding: 49px 10px 0;
+  margin-bottom: 93px;
+}
+
+.products .row {
+  max-width: 1600px;
+}
+
+.products h2 {
+  font-size: 96px;
+}
+
+.products h3 {
+  padding-bottom: 24px;
+  font-family: "Poppins", sans-serif;
+}
+
+.products p {
+  font-size: 18px;
+  line-height: 167%;
+  max-width: 658px;
+  margin: auto;
+  font-family: "Poppins", sans-serif;
+  padding-bottom: 58px;
+}
+
+.products .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 10px;
+}
+
+.products dl {
+  background: #000;
+  margin: 0;
+  color: #fff;
+}
+
+.products dl dd {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 120%;
+  margin: 0;
+  padding: 25px 0 25px 16px;
+  text-align: left;
+  border-left: 15px solid #3366ff;
+  margin-top: -10px;
+}
+
+.products dl dd strong {
+  display: block;
+  font-size: 50px;
+  line-height: 120%;
+  padding-top: 8px;
+}
+
+#welcome {
+  text-align: left;
+  margin-bottom: 128px;
+  padding-right: 10px;
+}
+
+#welcome .row {
+  max-width: 1187px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 68px;
+}
+
+a.buttons.black.shop {
+    border: 3px solid #fff;
+}
+
+#welcome h2 {
+  font-size: 48px;
+  padding: 33px 0 35px;
+  color: #fff;
+}
+
+#welcome h3 {
+  color: #fff;
+  font-size: 18px;
+}
+
+#welcome p {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 400;
+  line-height: 200%;
+  max-width: 793px;
+  padding-bottom: 62px;
+  font-family: "Poppins", sans-serif;
+}
+
+.handling {
+  text-align: left;
+}
+
+.handling .row {
+  max-width: 1187px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 70px;
+}
+
+.handling h2 {
+  font-size: 60px;
+  padding: 0 0 34px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bolder;
+}
+
+.handling p {
+  font-size: 18px;
+  line-height: 200%;
+  max-width: 709px;
+  margin: 0;
+  padding-bottom: 21px;
+  font-family: "Poppins", sans-serif;
+}
+
+.handling .top-bl {
+  padding-left: 30px;
+  border-left: 15px solid #3366ff;
+  padding-bottom: 0;
+  margin-bottom: 30px;
+  color: #494a4d;
+}
+
+.contact {
+  width: 100%;
+  max-width: 1146px;
+  margin: 50px auto 0;
+  padding: 15px 10px 0;
+  box-sizing: border-box;
+}
+
+.contact p {
+  font-size: 18px;
+  line-height: 120%;
+  font-family: "Roboto", sans-serif;
+}
+
+.contact .wrapper {
+  padding-top: 35px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.contact span {
+  display: block;
+}
+
+.contact .wrapper div {
+  flex-basis: 33%;
+}
+
+.contact .wrapper div img {
+  padding-bottom: 32px;
+}
+
+.contact .wrapper .address {
+  padding: 0 47px;
+  position: relative;
+}
+
+.contact .wrapper .address p {
+  font-weight: 400;
+  line-height: 200%;
+}
+
+.copy {
+  font-size: 11px;
+  color: #fff;
+  line-height: 120%;
+  width: 100%;
+  padding: 26px 10px 17px;
+  box-sizing: border-box;
+  background: #3366ff;
+}
+
+/*Contact Form Section*/
+.ctc-form {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ctc-form input[type="text"],
+.ctc-form textarea {
+  font-family: Arial;
+  font-size: 16px;
+  color: #000;
+  height: 45px;
+  display: block;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  margin: 0 auto 8px;
+}
+
+.ctc-form textarea {
+  height: 120px;
+  padding-top: 10px;
+}
+
+.ctc-form button {
+  display: block;
+}
+
+.ctc-form .recap {
+  display: inline-block;
+}
+
+.ctc-form .g-recaptcha div {
+  margin: 0 auto 10px;
+}
+
+.ctc-form .ctc-hide {
+  display: none;
+}
+
+form .messages p {
+  display: none;
+  font-family: Arial !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  font-size: 16px !important;
+}
+
+form .loading {
+  display: none;
+}
+
+form .alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+form .alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+form .alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+form [type="submit"] {
+  margin: 20px auto;
+}
+
+/*SocialMedias*/
+
+/*Inner Pages*/
+.inner #content {
+  min-height: 400px;
+  padding: 40px 0;
+}
+
+/*Privacy Policy*/
+
+/*Footer*/
+#footer .techno img {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 50px;
+}
+
+.contact .row {
+    position: relative;
+    padding-top: 30px
+}
+
+footer nav {
+    border-top: 2px solid #eff3f7;
+  max-width: 1146px;
+  margin: auto;
+}
+
+footer nav ul {
+  text-transform: uppercase;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 77px;
+  margin: 0;
+  padding: 55px 0 29px;
+}
+
+footer nav ul li a {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 120%;
+  color: #999999;
+}
+
+/*Responsiveness*/
+@media screen and (min-width: 1201px) {
+  #banner::before {
+    content: "";
+    background: url(../images/common/white.png) no-repeat;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 1209px;
+    z-index: -1;
+    margin-top: -132px;
+  }
+  .banner-text {
+    flex: 100%;
+    margin-top: 100px;
+  }
+  #welcome::before {
+    content: "";
+    background: url(../images/common/blue.png) no-repeat;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 1209px;
+    z-index: -1;
+    margin-top: -150px;
+  }
+  #welcome .row .right{
+    padding-top: 265px;
+  }
+  .handling .left {
+    padding-top: 120px;
+  }
+
+  .handling .right {
+    margin-top: -160px;
+  }
+  footer .contact::before {
+    content: "";
+    background: url(../images/common/white1.png) no-repeat;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 625px;
+    z-index: -1;
+    margin-top: -132px;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  #banner::before {
+    margin-top: -80px;
+  }
+  .banner-text{
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  #banner {
+    margin-bottom: 70px;
+  }
+
+  #banner small {
+    font-size: 55px;
+  }
+
+  #banner h3,
+  #banner p {
+    padding-left: 10px;
+  } 
+
+  #banner .buttons {
+    margin-left: 10px;
+  }
+
+  .products h2 {
+    font-size: 65px;
+  }
+
+  .products p {
+    font-size: 16px;
+  }
+
+  .products dl dd strong {
+    font-size: 60px;
+  }
+
+  .handling h2 {
+    font-size: 60px;
+  }
+
+  .handling p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .buttons {
+    width: 200px;
+    height: 45px;
+    font-size: 15px;
+  }
+
+  a.buttons.blue.phone{
+    margin: 10px auto auto;
+  }
+
+  #header nav ul {
+    column-gap: 30px;
+  }
+
+  #banner small {
+    font-size: 45px;
+  }
+
+  #banner p {
+    font-size: 16px;
+    padding-bottom: 40px;
+  }
+
+  .products dl dt img {
+    width: 100%;
+  }
+
+  .products dl dd {
+    font-size: 16px;
+  }
+
+  .products dl dd strong {
+    font-size: 40px;
+  }
+
+  #welcome p {
+    font-size: 16px;
+    padding-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  #banner h2 {
+    font-size: 60px;
+  }
+
+  #banner small {
+    font-size: 35px;
+  }
+
+  #banner p {
+    max-width: 550px;
+  }
+
+  #welcome .row {
+    column-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .row{
+    max-width: 96%;
+  }
+
+  #welcome{
+    background: #3366ff;
+  }
+
+  #banner,
+  footer .contact {
+    background: #fff;
+  }
+
+  a.buttons.blue.shop, a.buttons.black.shop {
+    width: 160px;
+    height: 28px;
+    font-size: 15px;
+    padding-left: 20px;
+  }
+
+  .buttons.shop::after {
+    background-size: 20px;
+    right: 0px;
+  }
+
+  .buttons.phone::before {
+    right: 8px;
+    background-size: 18px;
+  }
+
+  #header .buttons {
+    width: 230px;
+    font-size: 12px;
+    height: 20px;
+  }
+
+  #welcome {
+    margin-bottom: 60px;
+  }
+
+  #welcome h2 {
+    font-size: 40px;
+  }
+
+  .handling h2 {
+    font-size: 50px;
+  }
+} 
+
+@media screen and (max-width: 1024px){
+  body {
+    min-width: 320px;
+  }
+
+  #header .row .inside{
+    display: block;
+    margin: auto;
+  }
+
+  #header .row {
+    flex-wrap: wrap;
+  }
+
+  #header .logo-holder {
+    flex-basis: 100%;
+    padding-bottom: 20px;
+  }
+
+  #banner img {
+    width: 500px;
+  }
+
+  #banner .row{
+    display: block;
+    text-align: center;
+  }
+
+  #banner .buttons{
+    margin: auto;
+  }
+
+  a.buttons.blue.shop, a.buttons.black.shop {
+    width: 180px;
+  }
+
+  .banner-text {
+    position: relative;
+    text-align: center;
+    left: 0;
+    top: 0;
+    padding-top: 30px;
+  }
+
+  #banner h2 {
+    padding: 20px 0;
+  }
+
+  #banner p {
+    margin: auto;
+  }
+
+  .products {
+    margin-bottom: 30px;
+  }
+
+  .products h2 {
+    font-size: 50px;
+  }
+
+  .products dl dd{
+    padding: 10px 0 10px 16px;
+  }
+
+  .products dl dd strong {
+    font-size: 20px;
+  }
+
+  #welcome {
+    padding: 20px 10px;
+  }
+
+  #welcome .row {
+    flex-direction: column;
+  }
+
+  #welcome .right {
+    padding-top: 30px;
+  }
+
+  .products dl dd {
+      font-size: 9px;
+  }
+
+  .handling {
+    padding: 40px 10px;
+    background-size: cover !important;
+  }
+
+  .handling h2{
+    font-size: 38px;
+    text-align: center;
+  }
+
+  .handling img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .handling .row {
+    flex-direction: column-reverse;
+  }
+
+  .contact {
+    margin-top: 0;
+  }
+
+  .handling p,
+  .contact p{
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 800px){
+	#header {
+    padding: 0;
+  }
+	
+  #header .row {
+    width: 100%;
+  }
+	
+  #header nav {
+    display:block; 
+    height: auto; 
+    width: 100%; 
+    order: 0;
+  }
+  
+  #header nav ul { 
+    width: 100%; 
+    display: none; 
+    height: auto;
+    border-bottom:5px solid #000; 
+    padding: 0 15px;
+  }
+  
+  #header nav ul li { 
+    width: 100%;
+    position: relative; 
+  }
+  
+  #header nav ul li a { 
+    display: block; 
+    float:none; 
+    padding: 10px 0;
+  }
+  
+  #header nav a {
+    text-align: left; 
+    width: 100%;
+  }
+	
+  #header nav a strong {
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    left: 40%;
+  }
+
+  .logo-holder img {
+    width: 200px;
+  }
+	
+  #header nav a#pull {
+    display: block; 
+    color: #fff; 
+    background-color: #FF6500; 
+    height: 30px;
+    padding: 10px 0; 
+    width: 100%; 
+    position: relative;
+  }
+	
+  #header nav a#pull:after { 
+    content:""; 
+    background: url('../images/nav-icon.png') no-repeat; 
+    width: 20px; 
+    height: 20px; 
+    display: 
+    inline-block; 
+    position: absolute; 
+    right: 15px; 
+    top: 50%; 
+    transform: translateY(-50%);
+  }
+	
+  #header .logo-holder {
+    padding: 0;
+    order: 1;
+  }
+
+  #header .phone {
+    flex-basis: 100%;
+    margin: auto;
+    margin-bottom: 20px;
+    order: 2;
+  }
+
+  #header a.buttons.blue.phone{
+    display: none;
+  }
+
+  #header .inside nav{
+    width: 230px;
+  }
+
+  #banner{
+    margin-top: 0;
+  }
+
+  #banner h2 {
+    font-size: 40px;
+  }
+
+  #banner small {
+    font-size: 25px;
+  }
+
+  #banner img {
+    height: 450px;
+  }
+
+  .products {
+    background-size: cover !important;
+  }
+
+  .products h2 {
+    font-size: 35px;
+  }
+
+  .products .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .products .wrapper dl {
+    flex-basis: 100%;
+    margin: 15px 0;
+  }
+
+  .products dl dd {
+    padding: 25px 10px 18px;
+  }
+
+  #welcome .right {
+    text-align: center
+  }
+
+  #welcome .buttons {
+    margin: auto;
+  }
+
+  #welcome img {
+    height: auto;
+  }
+
+  .handling {
+    text-align: center
+  }
+
+  .handling h2 {
+    font-size: 40px;
+    padding-bottom: 20px;
+  }
+
+  .handling h3 {
+    padding-top: 20px;
+  }
+
+  .handling .buttons {
+    margin: auto;
+  }
+
+  .contact .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact .wrapper div {
+    flex-basis: 100%;
+    margin: 20px 0;
+  }
+
+  .contact .wrapper .address::before,
+  .contact .wrapper .address::after {
+    display: none
+  }
+
+  footer nav{
+    display: none;
+  }
+
+  footer nav ul {
+    padding: 10px 0;
+    column-gap: 20px;
+  }
+
+	.cta{
+    background: #FF6500  url("../images/common/phonecall.png") no-repeat center center;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;bottom: 1%;
+    display: block;
+    height: 60px;
+    position: fixed;
+    right: 0;
+    text-decoration: none; 
+    text-indent: -9999em;
+    width: 70px;
+    z-index: 999;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #banner img,
+  #welcome img {
+    height: 300px;
+    width: 300px;
+  }
+
+  footer nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  footer nav ul li {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  #banner {
+    margin-bottom: 20px;
+  }
+
+  #banner h2 {
+    font-size: 35px;
+  }
+}

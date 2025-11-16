@@ -1,0 +1,21 @@
+
+/*SOCIALS*/
+
+.socials ul { display: flex; align-items: center; justify-content: space-around; list-style-type: none; margin: 0; padding: 0 }
+.socials a::before { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; display: block; font-family: "FontAwesome"; font-style: normal; font-weight: normal; line-height: 1; speak: none; text-decoration: none!important; vertical-align: middle; font-size: 18px; width: 100%; height: 100%; color: #FFFFFF; }
+
+/*FACEBOOK*/
+.socials .facebook::before { content: "\f39e"; }
+/*TWITTER*/
+.socials .twitter::before { content: "\f099"; }
+/*GOOGLE PLUS*/
+.socials .google-plus::before { content: "\f0d5"; }
+/*RSS*/
+.socials .rss::before { content: "\f09e"; }
+/*INSTAGRAM*/
+.socials .instagram::before { content: "\f16d"; }
+/*LINKEDIN*/
+.socials .linkedin::before { content: "\f0e1"; }
+/*YELP*/
+.socials .yelp::before { content: "\f1e9"; }
+
