@@ -154,7 +154,13 @@ nav {
     position: relative;
     overflow: hidden;
 }
-
+.flex-style{
+    display: flex;
+    align-items: center;
+}
+.fullbody{
+    max-width: 200px;
+}
 section {
     position: absolute;
     top: 0;
