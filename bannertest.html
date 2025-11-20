@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Responsive Slider — Animated Captions</title>
+<style>
+  :root{
+    --bg: #071227;
+    --card: #0b1220;
+    --accent: #06b6d4;
+    --muted: #94a3b8;
+    --radius: 12px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,#071028 0%, #0d1a2b 100%);
+    color: #e6eef7;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    /* padding:32px; */
+  }
+
+  /* .slider-wrap{
+    width:min(1100px, 96vw);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border-radius: var(--radius);
+    padding:18px;
+    box-shadow: 0 8px 40px rgba(2,6,23,0.6);
+  } */
+   .slider-wrap {
+    width: 100%;
+    height: auto;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.02));
+    /* border-radius: var(--radius); */
+    /* padding: 18px; */
+    /* box-shadow: 0 8px 40px rgba(2, 6, 23, 0.6); */
+}
+
+  /* Slider */
+  .slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--bg);
+  }
+  .slides {
+    display:flex;
+    transition: transform 480ms cubic-bezier(.2,.9,.2,1);
+    will-change: transform;
+  }
+  .slide {
+    min-width:100%;
+    user-select:none;
+    pointer-events:none;
+    position:relative;
+    height:520px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  @media (max-width:900px){ .slide{ height:420px } }
+  @media (max-width:600px){ .slide{ height:300px } }
+
+  .slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transform: scale(1.03); /* default slight zoom out */
+    transition: transform 0.8s ease; /* image zoom timing (0.8s) */
+  }
+  .slide.active img{
+    transform: scale(1.0); /* active image slightly less zoom (gentle zoom-in effect) */
+  }
+
+  /* caption (bottom-left per user choice A) */
+  .caption{
+    position:absolute;
+    left:18px;
+    bottom:24px;
+    max-width:66%;
+    pointer-events:none;
+    text-shadow:0 10px 30px rgba(2,6,23,0.6);
+  }
+  .caption h3{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:-0.2px;
+    opacity:0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease; /* title 0.6s */
+    will-change: opacity, transform;
+  }
+  .caption p{
+    margin:8px 0 0 0;
+    color:var(--muted);
+    font-size:14px;
+    opacity:0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease 0.06s, transform 0.8s ease 0.06s; /* subtitle 0.8s, small delay */
+    will-change: opacity, transform;
+  }
+
+  /* when slide is active, animate caption in */
+  .slide.active .caption h3{
+    opacity:1;
+    transform: translateY(0);
+  }
+  .slide.active .caption p{
+    opacity:1;
+    transform: translateY(0);
+  }
+
+  /* Controls */
+  .controls{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+  }
+  .btn{
+    pointer-events:auto;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(4,8,15,0.6);
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--muted);
+    width:44px;
+    height:44px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    transition: transform .14s ease, background .14s;
+    backdrop-filter: blur(6px);
+  }
+  .btn:hover{ transform:translateY(-50%) scale(1.06); color:#fff; background: rgba(255,255,255,0.04) }
+  .btn.left{ left:12px }
+  .btn.right{ right:12px }
+
+  .bottom-bar{
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    pointer-events:auto;
+  }
+
+  .dots{ display:flex; gap:8px; align-items:center; }
+  .dot{
+    width:10px; height:10px; border-radius:999px;
+    background: rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.03);
+    cursor:pointer;
+    transition: transform .12s ease, background .12s;
+  }
+  .dot.active{
+    transform:scale(1.35);
+    background:var(--accent);
+    box-shadow:0 6px 20px rgba(6,182,212,0.18);
+    border-color: rgba(255,255,255,0.06);
+  }
+
+  .bar-right{ display:flex; gap:8px; align-items:center; }
+  .play-btn{
+    background:rgba(255,255,255,0.03);
+    color:var(--muted);
+    border-radius:8px;
+    padding:8px 10px;
+    font-size:14px;
+    cursor:pointer;
+    border:1px solid rgba(255,255,255,0.03);
+  }
+  .play-btn:hover{ color:white; transform:translateY(-1px) }
+
+  /* Thumbnails */
+  .thumbnails{
+    margin-top:12px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .thumb{
+    width:76px; height:48px; overflow:hidden; border-radius:8px;
+    border:2px solid transparent; cursor:pointer;
+    transition: transform .12s, border-color .12s, box-shadow .12s;
+  }
+  .thumb img{ width:100%; height:100%; object-fit:cover; display:block }
+  .thumb.active{ transform:scale(1.04); border-color:var(--accent); box-shadow:0 8px 20px rgba(6,182,212,0.08) }
+
+  /* accessibility helper */
+  .sr-only{
+    position:absolute!important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="slider-wrap" aria-label="Image slider demo">
+    <div class="slider" id="slider">
+      <div class="slides" id="slides" aria-live="off">
+        <!-- Slides injected by JS -->
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <button class="btn left" id="prev" aria-label="Previous slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn right" id="next" aria-label="Next slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="bottom-bar" role="region" aria-label="Slider controls">
+          <div style="display:flex; gap:12px; align-items:center;">
+            <div class="caption" id="caption" aria-live="polite">
+              <h3 id="cap-title">Beautiful Scenery</h3>
+              <p id="cap-sub">A responsive image slider with animated captions.</p>
+            </div>
+          </div>
+
+          <div class="bar-right">
+            <div class="dots" id="dots" role="tablist" aria-label="Slide indicators"></div>
+            <button class="play-btn" id="playPause" aria-pressed="false">Pause</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thumbnails" id="thumbs" aria-hidden="false"></div>
+  </div>
+
+<script>
+/* Full slider implementation with animated captions (smooth timing)
+   - Title transition: 0.6s
+   - Subtitle transition: 0.8s
+   - Image zoom: 0.8s
+   - Infinite loop via clones
+   - Autoplay with pause on hover
+   - Keyboard and touch support
+*/
+
+(function(){
+  const data = [
+    { src: 'https://picsum.photos/id/1015/1600/900', title: 'Mountain Vista', subtitle: 'Misty mountain over a calm lake' },
+    { src: 'https://picsum.photos/id/1016/1600/900', title: 'Forest Road', subtitle: 'Summer road between tall trees' },
+    { src: 'https://picsum.photos/id/1020/1600/900', title: 'Desert Dunes', subtitle: 'Wind-sculpted golden dunes' },
+    { src: 'https://picsum.photos/id/1024/1600/900', title: 'Coastal Cliffs', subtitle: 'Waves crashing on cliffs' },
+    { src: 'https://picsum.photos/id/1031/1600/900', title: 'City Lights', subtitle: 'Night city skyline with reflections' }
+  ];
+
+  const slidesEl = document.getElementById('slides');
+  const dotsEl = document.getElementById('dots');
+  const thumbsEl = document.getElementById('thumbs');
+  const captionTitle = document.getElementById('cap-title');
+  const captionSub = document.getElementById('cap-sub');
+
+  let currentIndex = 0; // index in data array
+  let isAnimating = false;
+
+  // Build slides with leading/trailing clones for seamless loop
+  function buildSlides(){
+    slidesEl.innerHTML = '';
+    // leading clone: last
+    slidesEl.appendChild(createSlide(data[data.length-1], true, -1));
+
+    data.forEach((d, i) => {
+      slidesEl.appendChild(createSlide(d, false, i));
+    });
+
+    // trailing clone: first
+    slidesEl.appendChild(createSlide(data[0], true, -2));
+  }
+
+  function createSlide(item, isClone=false, index=-1){
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    if (!isClone) slide.dataset.index = index;
+
+    const img = document.createElement('img');
+    img.src = item.src;
+    img.alt = item.title;
+    img.loading = 'lazy';
+
+    // caption inside each slide (so animation is tied to slide.active)
+    const caption = document.createElement('div');
+    caption.className = 'caption';
+    caption.innerHTML = `<h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.subtitle)}</p>`;
+
+    slide.appendChild(img);
+    slide.appendChild(caption);
+    return slide;
+  }
+
+  // safe text escape
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; });
+  }
+
+  // Build dots and thumbnails UI
+  function buildUI(){
+    dotsEl.innerHTML = '';
+    thumbsEl.innerHTML = '';
+    data.forEach((d, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'dot';
+      dot.setAttribute('aria-label', 'Go to slide ' + (i+1));
+      dot.dataset.index = i;
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+
+      const t = document.createElement('div');
+      t.className = 'thumb';
+      t.dataset.index = i;
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.src = d.src;
+      img.alt = d.title;
+      t.appendChild(img);
+      t.addEventListener('click', () => goTo(i));
+      thumbsEl.appendChild(t);
+    });
+  }
+
+  // Update UI markers and caption area (bottom-left)
+  function setActiveUI(index){
+    // dots & thumbs active
+    const dots = dotsEl.querySelectorAll('.dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    const thumbs = thumbsEl.querySelectorAll('.thumb');
+    thumbs.forEach((t,i) => t.classList.toggle('active', i === index));
+    // global caption (for screen readers / bottom-left copy)
+    captionTitle.textContent = data[index].title;
+    captionSub.textContent = data[index].subtitle;
+  }
+
+  // update slides transform and active classes
+  function updatePosition(immediate=false){
+    const offsetIndex = currentIndex + 1; // because first child is leading clone
+    const translateX = -offsetIndex * 100;
+    if (immediate) {
+      slidesEl.style.transition = 'none';
+      slidesEl.style.transform = `translateX(${translateX}%)`;
+      // force reflow then restore
+      void slidesEl.offsetWidth;
+      slidesEl.style.transition = '';
+    } else {
+      slidesEl.style.transform = `translateX(${translateX}%)`;
+    }
+
+    // set active class on correct slide element
+    const slideEls = slidesEl.querySelectorAll('.slide');
+    slideEls.forEach((s, i) => s.classList.toggle('active', i === offsetIndex));
+    setActiveUI(currentIndex);
+  }
+
+  // navigation functions
+  function next(){
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex++;
+    slidesEl.addEventListener('transitionend', onTransitionEnd);
+    updatePosition();
+  }
+  function prev(){
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex--;
+    slidesEl.addEventListener('transitionend', onTransitionEnd);
+    updatePosition();
+  }
+  function goTo(index){
+    if (isAnimating || index === currentIndex) return;
+    isAnimating = true;
+    currentIndex = index;
+    slidesEl.addEventListener('transitionend', () => { isAnimating = false; }, { once:true });
+    updatePosition();
+  }
+
+  function onTransitionEnd(){
+    slidesEl.removeEventListener('transitionend', onTransitionEnd);
+    // handle wrap-around when on clones
+    if (currentIndex >= data.length) {
+      currentIndex = 0;
+      updatePosition(true);
+    }
+    if (currentIndex < 0) {
+      currentIndex = data.length - 1;
+      updatePosition(true);
+    }
+    isAnimating = false;
+  }
+
+  // autoplay controls
+  let autoplay = true;
+  const autoplayMs = 3500;
+  let autoplayId = null;
+
+  function startAutoplay(){
+    stopAutoplay();
+    autoplayId = setInterval(() => next(), autoplayMs);
+    playBtn.textContent = 'Pause';
+    playBtn.setAttribute('aria-pressed','false');
+  }
+  function stopAutoplay(){
+    if (autoplayId) { clearInterval(autoplayId); autoplayId = null; }
+    playBtn.textContent = 'Play';
+    playBtn.setAttribute('aria-pressed','true');
+  }
+
+  // touch / drag support
+  let startX = 0, isDown = false;
+  function onPointerDown(e){
+    isDown = true;
+    startX = (e.touches ? e.touches[0].clientX : e.clientX);
+    slidesEl.style.transition = 'none';
+  }
+  function onPointerMove(e){
+    if (!isDown) return;
+    const x = (e.touches ? e.touches[0].clientX : e.clientX);
+    const dx = x - startX;
+    const percent = (dx / slidesEl.clientWidth) * 100;
+    const offsetIndex = currentIndex + 1;
+    slidesEl.style.transform = `translateX(${ -offsetIndex*100 + percent }%)`;
+  }
+  function onPointerUp(e){
+    if (!isDown) return;
+    isDown = false;
+    slidesEl.style.transition = '';
+    const endX = (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
+    const dx = endX - startX;
+    const threshold = slidesEl.clientWidth * 0.12;
+    if (dx > threshold) prev();
+    else if (dx < -threshold) next();
+    else updatePosition();
+  }
+
+  // keyboard navigation
+  function onKey(e){
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  }
+
+  // init
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const playBtn = document.getElementById('playPause');
+
+  function init(){
+    buildSlides();
+    buildUI();
+
+    currentIndex = 0;
+    requestAnimationFrame(() => updatePosition(true));
+
+    // controls
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+
+    playBtn.addEventListener('click', () => {
+      autoplay = !autoplay;
+      if (autoplay) startAutoplay(); else stopAutoplay();
+    });
+
+    // pause on hover/focus
+    const slider = document.getElementById('slider');
+    slider.addEventListener('mouseenter', () => { if (autoplayId) { clearInterval(autoplayId); autoplayId = null; } });
+    slider.addEventListener('mouseleave', () => { if (autoplay) startAutoplay(); });
+
+    // touch events
+    slidesEl.addEventListener('touchstart', onPointerDown, { passive:true });
+    slidesEl.addEventListener('touchmove', onPointerMove, { passive:true });
+    slidesEl.addEventListener('touchend', onPointerUp);
+    slidesEl.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+
+    // keyboard
+    window.addEventListener('keydown', onKey);
+
+    // responsive adjust
+    window.addEventListener('resize', () => updatePosition(true));
+
+    if (autoplay) startAutoplay();
+  }
+
+  // run
+  init();
+
+})();
+</script>
+</body>
+</html>
